@@ -1,0 +1,2 @@
+# Adding our virtual environment to .gitignore as it shouldn't be in the repo.
+env/
