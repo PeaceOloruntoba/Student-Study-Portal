@@ -259,20 +259,7 @@ def wiki(request):
 
 #Calculator Section/Tool
 def calculator(request):
-    result = None
-    if request.method == 'POST':
-        num1 = float(request.POST.get('num1'))
-        num2 = float(request.POST.get('num2'))
-        operator = request.POST.get('operator')
-        if operator == 'add':
-            result = num1 + num2
-        elif operator == 'subtract':
-            result = num1 - num2
-        elif operator == 'multiply':
-            result = num1 * num2
-        elif operator == 'divide':
-            result = num1 / num2
-    return render(request, 'calculator.html', {'result': result})
+    return render(request, 'dashboard/calculator.html')
 
 def register(request):
    if request.method == 'POST':
