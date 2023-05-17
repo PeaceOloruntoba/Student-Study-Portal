@@ -257,9 +257,6 @@ def wiki(request):
    }
    return render(request,"dashboard/wiki.html",context)
 
-#Calculator Section/Tool
-def calculator(request):
-    return render(request, 'dashboard/calculator.html')
 
 def register(request):
    if request.method == 'POST':
@@ -295,3 +292,98 @@ def profile(request):
       'todos_done':todos_done
    }
    return render(request,"dashboard/profile.html",context)
+
+#Calculator Section/Tool
+def calculator(request):
+    result = None
+
+    if request.method == 'POST':
+        choice = request.POST.get('choice')
+
+        if choice in ['1', '2', '3', '4', '5']:
+            num1 = float(request.POST.get('num1'))
+            num2 = float(request.POST.get('num2'))
+
+            if choice == '1':
+                result = add(num1, num2)
+            elif choice == '2':
+                result = subtract(num1, num2)
+            elif choice == '3':
+                result = multiply(num1, num2)
+            elif choice == '4':
+                result = divide(num1, num2)
+            elif choice == '5':
+                result = power(num1, num2)
+        elif choice in ['6', '7', '8', '9', '11', '12']:
+            num = float(request.POST.get('num'))
+
+            if choice == '6':
+                result = square_root(num)
+            elif choice == '7':
+                base = float(request.POST.get('base'))
+                result = logarithm(num, base)
+            elif choice == '8':
+                result = sine(num)
+            elif choice == '9':
+                result = cosine(num)
+            elif choice == '11':
+                result = factorial(int(num))
+            elif choice == '12':
+                result = absolute_value(num)
+        elif choice == '10':
+            angle = float(request.POST.get('angle'))
+            result = tangent(angle)
+        else:
+            result = "Invalid choice!"
+
+    return render(request, 'your_app_name/calculator.html', {'result': result})
+
+def add(x, y):
+    return x + y
+
+def subtract(x, y):
+    return x - y
+
+def multiply(x, y):
+    return x * y
+
+def divide(x, y):
+    if y != 0:
+        return x / y
+    else:
+        return "Cannot divide by zero!"
+
+def power(x, y):
+    return x ** y
+
+def square_root(x):
+    if x >= 0:
+        return math.sqrt(x)
+    else:
+        return "Invalid input!"
+
+def logarithm(x, base):
+    if x > 0 and base > 0 and base != 1:
+        return math.log(x, base)
+    else:
+        return "Invalid input!"
+
+def sine(x):
+    return math.sin(math.radians(x))
+
+def cosine(x):
+    return math.cos(math.radians(x))
+
+def tangent(x):
+    return math.tan(math.radians(x))
+
+def factorial(x):
+    if x >= 0:
+        return math.factorial(x)
+    else:
+        return "Invalid input!"
+
+def absolute_value(x):
+    return abs(x)
+
+    return render(request, 'dashboard/calculator.html')
