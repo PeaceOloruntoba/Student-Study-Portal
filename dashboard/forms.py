@@ -30,38 +30,32 @@ class DashboardForm(forms.Form):
 class TodoForm(forms.ModelForm):
    class Meta:
       model = Todo
-      fields = ['title','is_finished']
-      
-class ConversionForm(forms.Form):
-   CHOICES = [('length','Length'),('mass','Mass')]
-   measurement = forms.ChoiceField(choices = CHOICES, widget=forms.RadioSelect)
-   
-class ConversionLengthForm(forms.Form):
-   CHOICES = [('yard','Yard'),('foot','Foot')]
-   input = forms.CharField(required=False,label=False,widget=forms.TextInput(
-      attrs = {'type':'number','placeholder':'Enter the Number'}
-   ))
-   measure1 = forms.CharField(
-      label='',widget = forms.Select(choices = CHOICES)
-   )
-   measure2 = forms.CharField(
-      label='',widget = forms.Select(choices = CHOICES)
-   )
-   
-class ConversionMassForm(forms.Form):
-   CHOICES = [('pound','Pound'),('kilogram','Kilogram')]
-   input = forms.CharField(required=False,label=False,widget=forms.TextInput(
-      attrs = {'type':'number','placeholder':'Enter the Number'}
-   ))
-   measure1 = forms.CharField(
-      label='',widget = forms.Select(choices = CHOICES)
-   )
-   measure2 = forms.CharField(
-      label='',widget = forms.Select(choices = CHOICES)
-   )
-   
+      fields = ['title','is_finished'] 
    
 class UserRegistrationForm(UserCreationForm):
    class Meta:
       model = User
       fields = ['username','password1','password2']
+
+CHOICES = (
+    ('1', 'Addition'),
+    ('2', 'Subtraction'),
+    ('3', 'Multiplication'),
+    ('4', 'Division'),
+    ('5', 'Exponentiation'),
+    ('6', 'Square Root'),
+    ('7', 'Logarithm'),
+    ('8', 'Sine'),
+    ('9', 'Cosine'),
+    ('10', 'Tangent'),
+    ('11', 'Factorial'),
+    ('12', 'Absolute Value'),
+)
+
+class CalculatorForm(forms.Form):
+    choice = forms.ChoiceField(label='Operation', choices=CHOICES, widget=forms.Select(attrs={'class': 'form-control'}))
+    num1 = forms.FloatField(label='Number 1', widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    num2 = forms.FloatField(label='Number 2', widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    num = forms.FloatField(label='Number', widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    base = forms.FloatField(label='Base', widget=forms.NumberInput(attrs={'class': 'form-control'}))
+    angle = forms.FloatField(label='Angle', widget=forms.NumberInput(attrs={'class': 'form-control'}))
