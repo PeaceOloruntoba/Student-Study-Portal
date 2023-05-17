@@ -9,7 +9,6 @@ from unittest import result
 from django import contrib
 from django.core.checks import messages
 from django.forms.widgets import FileInput
-
 from django.shortcuts import *
 from . forms import *
 from django.contrib import messages
@@ -259,6 +258,7 @@ def wiki(request):
 
 #Calculator Section/Tool
 def calculator(request):
+   
     return render(request, 'dashboard/calculator.html')
 
 def register(request):
