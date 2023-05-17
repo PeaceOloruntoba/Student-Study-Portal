@@ -9,7 +9,6 @@ from unittest import result
 from django import contrib
 from django.core.checks import messages
 from django.forms.widgets import FileInput
-
 from django.shortcuts import *
 from . forms import *
 from django.contrib import messages
@@ -257,7 +256,6 @@ def wiki(request):
    }
    return render(request,"dashboard/wiki.html",context)
 
-
 def register(request):
    if request.method == 'POST':
       form = UserRegistrationForm(request.POST)
@@ -292,7 +290,7 @@ def profile(request):
       'todos_done':todos_done
    }
    return render(request,"dashboard/profile.html",context)
-
+  
 #Calculator Section/Tool
 def calculator(request):
     result = None
@@ -387,3 +385,4 @@ def absolute_value(x):
     return abs(x)
 
     return render(request, 'dashboard/calculator.html')
+  
