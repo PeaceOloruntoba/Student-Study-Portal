@@ -1,14 +1,14 @@
-from multiprocessing import context
-from unittest import result
-from django import contrib
-from django.core.checks import messages
-from django.forms.widgets import FileInput
 # Developed by Peace Oloruntoba aka Prof Prince Peace
 # you can contact me on whatsapp and phone call @+2348166846226
 # email @ profprincepeace@gmail.com or peascainc@gmail.com
 # social media @ Peace Oloruntoba or PeaceOloruntoba including LinkedIn, Facebook, Twitter, etc.
 #
 # copyright 2022.
+from multiprocessing import context
+from unittest import result
+from django import contrib
+from django.core.checks import messages
+from django.forms.widgets import FileInput
 
 from django.shortcuts import *
 from . forms import *
@@ -16,6 +16,7 @@ from django.contrib import messages
 from django.views import generic
 from youtubesearchpython import VideosSearch
 import wikipedia
+import requests
 
 # Create your views here.
 def home(request):
@@ -256,65 +257,9 @@ def wiki(request):
    }
    return render(request,"dashboard/wiki.html",context)
 
-#Conversion Section/Tool
-def conversion(request):
-   if request.method == "POST":
-      form = ConversionForm(request.POST)
-# Conversion of Length
-      if request.POST['measurement'] == 'length':
-         measurement_form = ConversionLengthForm()
-         context = {
-            'form':form,
-            'm_form':measurement_form,
-            'input':True
-         }
-         if 'input' in request.POST:
-            first = request.POST['measure1']
-            second = request.POST['measure2']
-            input = request.POST['input']
-            answer = ''
-            if input and int(input) >=0:
-               if first == 'yard' and second == 'foot':
-                  answer = f'{input} yard = {int(input)*3} foot'
-               if first == 'foot' and second == 'yard':
-                  answer = f'{input} foot = {int(input)/3} yard'
-            context = {
-               'form':form,
-               'm_form':measurement_form,
-               'input':True,
-               'answer':answer
-            }
-# Conversion of Mass
-      if request.POST['measurement'] == 'mass':
-         measurement_form = ConversionMassForm()
-         context = {
-            'form':form,
-            'm_form':measurement_form,
-            'input':True
-         }
-         if 'input' in request.POST:
-            first = request.POST['measure1']
-            second = request.POST['measure2']
-            input = request.POST['input']
-            answer = ''
-            if input and int(input) >=0:
-               if first == 'pound' and second == 'kilogram':
-                  answer = f'{input} pound = {int(input)*0.453592} kilogram'
-               if first == 'kilogram' and second == 'pound':
-                  answer = f'{input} kilogram = {int(input)*2.20462} pound'
-            context = {
-               'form':form,
-               'm_form':measurement_form,
-               'input':True,
-               'answer':answer
-            }
-   else:
-      form = ConversionForm()
-   context = {
-      'form':form,
-      'input':False
-   }
-   return render(request,"dashboard/conversion.html",context)
+#Calculator Section/Tool
+def calculator(request):
+    return render(request, 'dashboard/calculator.html')
 
 def register(request):
    if request.method == 'POST':
